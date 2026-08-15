@@ -1,28 +1,34 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Login from './components/Login'
-import Scoring from './components/Scoring'
-import Leaderboard from './components/Leaderboard'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Login from "./components/Login";
+import Scoring from "./components/Scoring";
+import Leaderboard from "./components/Leaderboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-
   const appRouter = createBrowserRouter([
     {
       path: "/",
-      element: <Login/>
+      element: <Login />,
     },
     {
       path: "/scoring",
-      element: <Scoring />
+      element: (
+        <ProtectedRoute>
+          <Scoring />
+        </ProtectedRoute>
+      ),
     },
     {
       path: "/leaderboard",
-      element: <Leaderboard/>
-    }
-  ])
+      element: <Leaderboard />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+  ]);
 
-  return (
-    <RouterProvider router={appRouter}/>
-  )
+  return <RouterProvider router={appRouter} />;
 }
 
-export default App
+export default App;
